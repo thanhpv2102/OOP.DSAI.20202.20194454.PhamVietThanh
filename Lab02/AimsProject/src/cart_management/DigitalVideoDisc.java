@@ -1,12 +1,14 @@
 package cart_management;
 
 public class DigitalVideoDisc {
-
+	
+	private static int nbDigitalVideoDiscs = 0;
 	private String title;
 	private String category;
 	private String director;
 	private int length;
 	private float cost;
+	private int id;
 	
 	
 	
@@ -17,6 +19,8 @@ public class DigitalVideoDisc {
 		this.director = director;
 		this.length = length;
 		this.cost = cost;
+		this.id = nbDigitalVideoDiscs;
+		nbDigitalVideoDiscs += 1;
 	}
 	
 	
@@ -26,6 +30,8 @@ public class DigitalVideoDisc {
 		this.category = category;
 		this.director = director;
 		this.cost = cost;
+		this.id = nbDigitalVideoDiscs;
+		nbDigitalVideoDiscs += 1;
 	}
 
 	public DigitalVideoDisc(String title, String category, float cost) {
@@ -33,11 +39,15 @@ public class DigitalVideoDisc {
 		this.title = title;
 		this.category = category;
 		this.cost = cost;
+		this.id = nbDigitalVideoDiscs;
+		nbDigitalVideoDiscs += 1;
 	}
 	
 	public DigitalVideoDisc(String title) {
 		super();
 		this.title = title;
+		this.id = nbDigitalVideoDiscs;
+		nbDigitalVideoDiscs += 1;
 	}
 
 	public String getTitle() {
@@ -55,6 +65,8 @@ public class DigitalVideoDisc {
 	public float getCost() {
 		return cost;
 	}
-	
+	public float getId() {
+		return id;
+	}
 
 }
