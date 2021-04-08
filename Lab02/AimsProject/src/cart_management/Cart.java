@@ -61,4 +61,35 @@ public class Cart {
 		}
 	}
 
+
+	protected void print() {
+		System.out.println("***********************CART***********************");
+		System.out.println("Ordered Items:");
+		for (int i = 0; i < qtyOrdered; i++) {
+			System.out.println((i+1) + ". " + itemsOrdered[i].getDetail());
+		}
+		System.out.println("Total cost: " + totalCost());
+		System.out.println("**************************************************");
+
+	}
+
+	protected void searchByID(int id) {
+		for (int i = 0; i < qtyOrdered; i++) {
+			if (itemsOrdered[i].getId() == id) {
+				System.out.println(itemsOrdered[i].getDetail());
+				return;
+			}
+		}
+		System.out.println("No match");
+	}
+
+	protected void searchByTitle(String title) {
+		for (int i = 0; i < qtyOrdered; i++) {
+			if (itemsOrdered[i].search(title)) {
+				itemsOrdered[i].getDetail();
+				return;
+			}
+		}
+		System.out.println("No match");
+	}
 }
