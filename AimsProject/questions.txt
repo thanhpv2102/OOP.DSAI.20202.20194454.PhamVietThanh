@@ -1,0 +1,5 @@
+1. I prefer the method with arbitrary number of arguments, as we dont have to create an array of dvd to add to cart.
+
+2. When we call the swap method, we refer to the 'copies' of 2 objects, not the exact objects.
+
+3. It changed because we refer to the exact object, unlike the swap function refers to the 'copies' of 2 objects.
