@@ -3,7 +3,7 @@ package hust.soict.dsai.aims.store;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class Store {
 	public static final int MAX_NUMBERS_INSTOCK = 200;
