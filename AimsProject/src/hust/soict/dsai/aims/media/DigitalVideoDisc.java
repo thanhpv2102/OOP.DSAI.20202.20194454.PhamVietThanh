@@ -1,64 +1,39 @@
 package hust.soict.dsai.aims.media;
 
 
-public class DigitalVideoDisc extends Disc {
-	
-	private static int nbDigitalVideoDiscs = 0;
+public class DigitalVideoDisc extends Disc implements Playable{
+
 	public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.director = director;
-		this.length = length;
-		this.cost = cost;
-		this.id = nbDigitalVideoDiscs;
-		nbDigitalVideoDiscs += 1;
+		super(title, category, director, length, cost);
 	}
 
 
 	public DigitalVideoDisc(String title, String category, String director, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.director = director;
-		this.cost = cost;
-		this.id = nbDigitalVideoDiscs;
-		nbDigitalVideoDiscs += 1;
+		super(title, category, director, cost);
 	}
 
 	public DigitalVideoDisc(String title, String category, float cost) {
-		super();
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
-		this.id = nbDigitalVideoDiscs;
-		nbDigitalVideoDiscs += 1;
+		super(title, category, cost);
 	}
 
 	public DigitalVideoDisc(String title) {
-		super();
-		this.title = title;
-		this.id = nbDigitalVideoDiscs;
-		nbDigitalVideoDiscs += 1;
+		super(title);
 	}
 
-	public String getDirector() {
-		return director;
-	}
-	
-	public int getLength() {
-		return length;
-	}
-	
-	public String getDetail() {
-		return ("DVD - " + title + " - " + category + " - " + director + " - " + length +": " + cost + " $");
-	}
 	public boolean search(String title) {
-		if (title == this.title) {
+		if (title == this.getTitle()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	public void play() {
+		System.out.println("Playing DVD: " + this.getTitle());
+		System.out.println("DVD length: " + this.getLength());
+	}
+	
+	public String getDetail() {
+		return ("DVD ID "+ this.getId() +": - title: " + this.getTitle() + " - category: " + this.getCategory() + " - director: " + this.getDirector() + " - length: " + this.getLength() +": " + this.getCost() + " $");
+	}
 }

@@ -7,7 +7,13 @@ public class Book extends Media{
 	
 	private List<String> authors =  new ArrayList<String>();
 	
-	public Book() {
+	public Book(String title, String category, float cost) {
+		super(title, category, cost);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Book(String title) {
+		super(title);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -27,5 +33,9 @@ public class Book extends Media{
 		} else {
 			System.out.println(authorName + " not in list");
 		}
+	}
+	
+	public String getDetail() {
+		return ("Book ID "+ this.getId() +": - title: " + this.getTitle() + " - category: " + this.getCategory() +": " + this.getCost() + " $");
 	}
 }
