@@ -16,6 +16,20 @@
             <Insets right="8.0" />
          </BorderPane.margin>
          <children>
+            <SplitMenuButton mnemonicParsing="false" text="Tools">
+              <items>
+                <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <RadioButton fx:id="r_pen" mnemonicParsing="false" text="Pen"/>
+                     </graphic>
+                  </MenuItem>
+                <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <RadioButton fx:id="r_eraser" mnemonicParsing="false" text="Eraser"/>
+                     </graphic>
+                  </MenuItem>
+              </items>
+            </SplitMenuButton>
             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
          </children>
       </VBox>
