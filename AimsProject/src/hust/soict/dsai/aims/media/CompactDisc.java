@@ -3,6 +3,8 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 public class CompactDisc extends Disc implements Playable {
 
 	
@@ -63,13 +65,17 @@ public class CompactDisc extends Disc implements Playable {
 		return lengthTotal;
 	}
 	
-	public void play() {
-		if (tracks.size() == 0) {
-			System.out.println("no track in CD");
-		} else {
+	public void play() throws PlayerException{
+		if (this.getLength() > 0) {
 			for (int i = 0; i < tracks.size(); i++) {
-				tracks.get(i).play();
+				try {
+					tracks.get(i).play();
+				} catch (PlayerException e) {
+					throw e;
+				}
 			}
+		} else {
+			throw new PlayerException("ERROR: CD length is non-positive!");
 		}
 	}
 	
