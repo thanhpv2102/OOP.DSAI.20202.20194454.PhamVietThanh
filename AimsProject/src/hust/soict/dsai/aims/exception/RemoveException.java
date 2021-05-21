@@ -5,9 +5,9 @@ import java.awt.FlowLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class PlayerException extends Throwable{
+public class RemoveException extends Throwable{
 
-	public PlayerException(String error) {
+	public RemoveException(String error) {
 		JPanel container = new JPanel();
 		container.setLayout(new FlowLayout(FlowLayout.CENTER));
 		

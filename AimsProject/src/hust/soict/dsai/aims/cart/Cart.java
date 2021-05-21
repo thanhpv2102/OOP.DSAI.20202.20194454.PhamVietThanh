@@ -3,42 +3,44 @@ package hust.soict.dsai.aims.cart;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import hust.soict.dsai.aims.exception.RemoveException;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+	private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 
-	public void addMedia(Media media) {
+	public String addMedia(Media media) {
 		if (itemsOrdered.size() == MAX_NUMBERS_ORDERED) {
-			System.out.println("Cart full");
+			return ("Cart full");
 		} else {
 			itemsOrdered.add(media);
-			System.out.println("Successfully added " + media.getTitle());
+			return ("Successfully added " + media.getTitle());
 		}
 	}
 
-	public void removeMedia(Media media) {
+	public String removeMedia(Media media) throws RemoveException{
 		if (itemsOrdered.size() == 0) {
-			System.out.println("Cart empty");
+			return ("Cart empty");
 		} else if (!isInCart(media)){
-			System.out.println(media.getTitle() + " not in cart");
+			throw new RemoveException(media.getTitle() + " not in cart");
 		} else {
 			itemsOrdered.remove(itemsOrdered.indexOf(media));
-			System.out.println("Successfully removed " + media.getTitle());
+			return ("Successfully removed " + media.getTitle());
 		}
 	}
 	
-	public void removeMedia(String title) {
+	public String removeMedia(String title) throws RemoveException{
 		for (int i = 0; i < itemsOrdered.size(); i++) {
 			if (itemsOrdered.get(i).getTitle().equals(title)) {
 				itemsOrdered.remove(i);
-				System.out.println("Successfully removed " + title);
-				return;
+				return ("Successfully removed " + title);
 			}
 		}
-		System.out.println(title + " not in cart");
+		throw new RemoveException(title + " not in cart");
 	}
 
 	public float totalCost() {
@@ -68,11 +70,15 @@ public class Cart {
 		return (itemsOrdered.size() == 0);
 	}
 
-	public void placeOrder() {
-		for (int i = itemsOrdered.size() - 1; i >= 0 ; i--) {
-			itemsOrdered.remove(i);
+	public String placeOrder() {
+		if (isEmpty()) {
+			return ("Cart is empty");
+		} else {
+			for (int i = itemsOrdered.size() - 1; i >= 0 ; i--) {
+				itemsOrdered.remove(i);
+			}
+			return ("Order placed successfully");
 		}
-		System.out.println("order placed successfully");
 	}
 
 	public void filterTitle(String title) {
@@ -121,5 +127,9 @@ public class Cart {
 		}
 		System.out.println(title + " not in cart");
 		return null;
+	}
+	
+	public ObservableList<Media> getItemsOrdered() {
+		return itemsOrdered;
 	}
 }

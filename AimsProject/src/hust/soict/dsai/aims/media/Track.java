@@ -7,8 +7,13 @@ public class Track implements Playable {
 	private int length;
 	private String title;
 
-	public Track() {
-		// TODO Auto-generated constructor stub
+	public Track(int length, String title) {
+		this.length = length;
+		this.title = title;
+	}
+	
+	public Track(String title) {
+		this.title = title;
 	}
 
 	public int getLength() {
@@ -19,10 +24,9 @@ public class Track implements Playable {
 		return title;
 	}
 
-	public void play() throws PlayerException{
+	public String play() throws PlayerException{
 		if (this.getLength() > 0) {
-			System.out.println("Playing track: " + this.getTitle());
-			System.out.println("Track length: " + this.getLength());
+			return ("Playing track: " + this.getTitle() + "\n" + "Track length: " + this.getLength());
 		} else {
 			throw new PlayerException("ERROR: Track length is non-positive!");
 		}
@@ -34,5 +38,9 @@ public class Track implements Playable {
 			return true;
 		}
 		return false;
+	}
+	
+	public String toString() {
+		return "Track " + getTitle() + ": " + getLength();
 	}
 }

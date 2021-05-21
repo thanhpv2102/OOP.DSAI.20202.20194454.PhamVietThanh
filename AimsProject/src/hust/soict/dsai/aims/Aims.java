@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.InsertionException;
+import hust.soict.dsai.aims.exception.InvalidDataException;
+import hust.soict.dsai.aims.exception.PlayerException;
+import hust.soict.dsai.aims.exception.RemoveException;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
@@ -23,7 +27,7 @@ public class Aims {
 	static int id = 0;
 	static Scanner scanner = new Scanner(System.in);
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PlayerException, RemoveException, InsertionException, InvalidDataException{
 		// TODO Auto-generated method stub
 		
 		

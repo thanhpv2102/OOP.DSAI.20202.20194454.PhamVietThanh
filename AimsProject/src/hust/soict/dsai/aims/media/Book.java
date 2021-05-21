@@ -3,35 +3,37 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
+import hust.soict.dsai.aims.exception.InsertionException;
+import hust.soict.dsai.aims.exception.InvalidDataException;
+import hust.soict.dsai.aims.exception.RemoveException;
+
 public class Book extends Media{
 	
 	private List<String> authors =  new ArrayList<String>();
 	
-	public Book(String title, String category, float cost) {
+	public Book(String title, String category, float cost) throws InvalidDataException{
 		super(title, category, cost);
-		// TODO Auto-generated constructor stub
 	}
 	
-	public Book(String title) {
+	public Book(String title) throws InvalidDataException{
 		super(title);
-		// TODO Auto-generated constructor stub
 	}
 
-	public void addAuthor(String authorName) {
+	public String addAuthor(String authorName) throws InsertionException{
 		if (authors.contains(authorName)) {
-			System.out.println(authorName + " already in list");
+			throw new InsertionException(authorName + " already in list");
 		} else {
 			authors.add(authorName);
-			System.out.println(authorName + " added");
+			return (authorName + " added");
 		}
 	}
 	
-	public void removeAuthor(String authorName) {
+	public String removeAuthor(String authorName) throws RemoveException{
 		if (authors.contains(authorName)) {
 			authors.remove(authors.indexOf(authorName));
-			System.out.println(authorName + " removed");
+			return (authorName + " removed");
 		} else {
-			System.out.println(authorName + " not in list");
+			throw new RemoveException(authorName + " not in list");
 		}
 	}
 	

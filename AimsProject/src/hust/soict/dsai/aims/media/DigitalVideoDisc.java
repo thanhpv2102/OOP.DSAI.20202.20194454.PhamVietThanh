@@ -1,23 +1,24 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.InvalidDataException;
 import hust.soict.dsai.aims.exception.PlayerException;
 
 public class DigitalVideoDisc extends Disc implements Playable{
 
-	public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
+	public DigitalVideoDisc(String title, String category, String director, int length, float cost) throws InvalidDataException{
 		super(title, category, director, length, cost);
 	}
 
 
-	public DigitalVideoDisc(String title, String category, String director, float cost) {
+	public DigitalVideoDisc(String title, String category, String director, float cost) throws InvalidDataException{
 		super(title, category, director, cost);
 	}
 
-	public DigitalVideoDisc(String title, String category, float cost) {
+	public DigitalVideoDisc(String title, String category, float cost) throws InvalidDataException{
 		super(title, category, cost);
 	}
 
-	public DigitalVideoDisc(String title) {
+	public DigitalVideoDisc(String title) throws InvalidDataException{
 		super(title);
 	}
 
@@ -29,10 +30,9 @@ public class DigitalVideoDisc extends Disc implements Playable{
 		}
 	}
 
-	public void play() throws PlayerException {
+	public String play() throws PlayerException {
 		if (this.getLength() > 0) {
-			System.out.println("Playing DVD: " + this.getTitle());
-			System.out.println("DVD length: " + this.getLength());
+			return ("Playing DVD: " + this.getTitle() + "\n" + "DVD length: " + this.getLength() + "");
 		} else {
 			throw new PlayerException("ERROR: DVD length is non-positive!");
 		}

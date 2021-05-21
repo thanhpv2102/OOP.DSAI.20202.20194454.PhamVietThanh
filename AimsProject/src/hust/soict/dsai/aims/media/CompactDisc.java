@@ -3,7 +3,10 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
+import hust.soict.dsai.aims.exception.InsertionException;
+import hust.soict.dsai.aims.exception.InvalidDataException;
 import hust.soict.dsai.aims.exception.PlayerException;
+import hust.soict.dsai.aims.exception.RemoveException;
 
 public class CompactDisc extends Disc implements Playable {
 
@@ -15,22 +18,22 @@ public class CompactDisc extends Disc implements Playable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CompactDisc(String title, String category, String artist, String director, float cost) {
+	public CompactDisc(String title, String category, String artist, String director, float cost) throws InvalidDataException{
 		super(title, category, director, cost);
 		this.artist = artist;
 	}
 	
-	public CompactDisc(String title, String category, String artist, float cost) {
+	public CompactDisc(String title, String category, String artist, float cost) throws InvalidDataException{
 		super(title, category, cost);
 		this.artist = artist;
 	}
 	
-	public CompactDisc(String title, String category, float cost) {
+	public CompactDisc(String title, String category, float cost) throws InvalidDataException{
 		super(title, category, cost);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CompactDisc(String title) {
+	public CompactDisc(String title) throws InvalidDataException{
 		super(title);
 		// TODO Auto-generated constructor stub
 	}
@@ -39,21 +42,21 @@ public class CompactDisc extends Disc implements Playable {
 		return artist;
 	}
 	
-	public void addTrack(Track track) {
+	public String addTrack(Track track) throws InsertionException{
 		if (tracks.contains(track)) {
-			System.out.println(track.getTitle() + " already in list");
+			throw new InsertionException(track.getTitle() + " already in list");
 		} else {
 			tracks.add(track);
-			System.out.println(track + " added");
+			return (track + " added");
 		}
 	}
 	
-	public void removeTrack(Track track) {
+	public String removeTrack(Track track) throws RemoveException{
 		if (tracks.contains(track)) {
 			tracks.remove(tracks.indexOf(track));
-			System.out.println(track.getTitle() + " removed");
+			return (track.getTitle() + " removed");
 		} else {
-			System.out.println(track.getTitle() + " not in list");
+			throw new RemoveException(track.getTitle() + " not in list");
 		}
 	}
 	
@@ -65,15 +68,17 @@ public class CompactDisc extends Disc implements Playable {
 		return lengthTotal;
 	}
 	
-	public void play() throws PlayerException{
+	public String play() throws PlayerException {
+		String trackList = "";
 		if (this.getLength() > 0) {
 			for (int i = 0; i < tracks.size(); i++) {
 				try {
-					tracks.get(i).play();
+					trackList += tracks.get(i).play() + '\n';
 				} catch (PlayerException e) {
 					throw e;
 				}
 			}
+			return trackList;
 		} else {
 			throw new PlayerException("ERROR: CD length is non-positive!");
 		}

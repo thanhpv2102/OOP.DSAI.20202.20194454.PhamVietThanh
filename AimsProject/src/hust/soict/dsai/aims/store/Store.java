@@ -12,36 +12,35 @@ public class Store {
 
 	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
-	public void addMedia(Media media) {
+	public String addMedia(Media media) {
 		if (itemsInStore.size() == MAX_NUMBERS_INSTOCK) {
-			System.out.println("Store full");
+			return ("Store full");
 		} else if (isInStore(media)){
-			System.out.println(media.getTitle() + " already in store");
+			return (media.getTitle() + " already in store");
 		} else {
 			itemsInStore.add(media);
 			itemsInStore.get(itemsInStore.size() - 1).setId(itemsInStore.size());
-			System.out.println("Successfully added " + media.getTitle());
+			return ("Successfully added " + media.getTitle());
 		}
 	}
 
-	public void removeMedia(Media media) {
+	public String removeMedia(Media media) {
 		if (isInStore(media)) {
-			System.out.println("Successfully removed " + media.getTitle());
 			itemsInStore.remove(itemsInStore.indexOf(media));
+			return ("Successfully removed " + media.getTitle());
 		} else {
-			System.out.println(media.getTitle() + " not in store");
+			return (media.getTitle() + " not in store");
 		}
 	}
 	
-	public void removeMedia(String title) {
+	public String removeMedia(String title) {
 		for (int i = 0; i < itemsInStore.size(); i++) {
 			if (itemsInStore.get(i).getTitle().equals(title)) {
 				itemsInStore.remove(i);
-				System.out.println("Successfully removed " + title);
-				return;
+				return ("Successfully removed " + title);
 			}
 		}
-		System.out.println(title + " not in store");
+		return (title + " not in store");
 	}
 
 	private boolean isInStore(Media media) {
@@ -57,6 +56,10 @@ public class Store {
 			System.out.println(itemsInStore.get(i).toString());
 		}
 		System.out.println("----------------------------------------");
+	}
+	
+	public ArrayList<Media> getItemsInStore() {
+		return itemsInStore;
 	}
 
 	public Media viewDetail(String title) {

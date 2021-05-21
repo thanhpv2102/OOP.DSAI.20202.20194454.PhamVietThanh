@@ -2,6 +2,8 @@ package hust.soict.dsai.aims.media;
 
 import java.util.Comparator;
 
+import hust.soict.dsai.aims.exception.InvalidDataException;
+
 public abstract class Media {
 
 	//id created when add to store
@@ -16,15 +18,27 @@ public abstract class Media {
 		
 	}
 	
-	public Media(String title, String category, float cost) {
+	public Media(String title, String category, float cost) throws InvalidDataException{
 		super();
+		if (cost < 0) {
+			throw new InvalidDataException("Cost is negative");
+		}
+		if (title.strip().equals("")) {
+			throw new InvalidDataException("Field(s) is missing data");
+		}
+		if (category.strip().equals("")) {
+			throw new InvalidDataException("Field(s) is missing data");
+		}
 		this.title = title;
 		this.category = category;
 		this.cost = cost;
 	}
 	
-	public Media(String title) {
+	public Media(String title) throws InvalidDataException{
 		super();
+		if (title.strip().equals("")) {
+			throw new InvalidDataException("Field(s) is missing data");
+		}
 		this.title = title;
 	}
 
@@ -50,9 +64,13 @@ public abstract class Media {
 	
 	public boolean equals(Object obj) {
 		if (obj instanceof Media) {
-			Media media = (Media) obj;
-			if (this.title.equals(media.getTitle())) {
-				return true;
+			try {
+				Media media = (Media) obj;
+				if (this.title.equals(media.getTitle())) {
+					return true;
+				}
+			} catch (NullPointerException | ClassCastException e2) {
+				return false;
 			}
 		}
 		return false;
